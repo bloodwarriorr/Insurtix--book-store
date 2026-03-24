@@ -1,0 +1,15 @@
+# Dotnet
+bin/
+obj/
+*.user
+.vs/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
