@@ -1,8 +1,10 @@
 ﻿namespace BookStore.Services
 {
-    using System.Xml.Linq;
     using Models;
     using System.Text;
+    using System.Web;
+    using System.Xml.Linq;
+
     public class BookService : IBookService
     {
         private readonly string _xmlPath;
@@ -149,10 +151,15 @@
         {
             var books = GetAll();
             var sb = new StringBuilder();
+            sb.Append("<h2>Bookstore Inventory Report</h2>");
             sb.Append("<table border='1'><tr><th>Title</th><th>Authors</th><th>Category</th><th>Year</th><th>Price</th></tr>");
             foreach (var b in books)
             {
-                sb.Append($"<tr><td>{b.Title}</td><td>{string.Join(", ", b.Authors)}</td><td>{b.Category}</td><td>{b.Year}</td><td>{b.Price}</td></tr>");
+                sb.Append($"<tr><td>{HttpUtility.HtmlEncode(b.Title)}</td>" +
+           $"<td>{HttpUtility.HtmlEncode(string.Join(", ", b.Authors))}</td>" +
+           $"<td>{b.Category}</td>" +
+           $"<td>{b.Year}</td>" +
+           $"<td>{b.Price}</td></tr>");
             }
             sb.Append("</table>");
             return sb.ToString();

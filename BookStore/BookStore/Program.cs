@@ -1,5 +1,7 @@
 using BookStore.Services;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var config = builder.Configuration;
 // Add services to the container.
 Console.WriteLine($"Current Env: {builder.Environment.EnvironmentName}");
@@ -16,9 +18,10 @@ app.MapControllers();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
     app.MapOpenApi();
 }
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
