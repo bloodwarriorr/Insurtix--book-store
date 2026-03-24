@@ -1,0 +1,46 @@
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<form *ngIf="bookForm" [formGroup]="bookForm" (ngSubmit)="submit()">
+  <h3 *ngIf="isEdit">Edit Book:</h3>
+  <label>
+    ISBN:
+    <input formControlName="isbn" [readonly]="isEdit" 
+           [placeholder]="isEdit ? '' : 'Enter unique ISBN'" />
+    <small *ngIf="isEdit" style="color: gray;"></small>
+  </label>
+
+  <label>
+    Title:
+    <input formControlName="title" />
+  </label>
+
+  <div formArrayName="authors">
+    <label>Authors:</label>
+    <div *ngFor="let authorCtrl of authors.controls; let i = index">
+      <input [formControlName]="i" />
+      <button type="button" (click)="removeAuthor(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addAuthor()">Add Author</button>
+  </div>
+
+  <label>
+    Category:
+    <input formControlName="category" />
+  </label>
+
+  <label>
+    Year:
+    <input type="number" formControlName="year" />
+  </label>
+
+  <label>
+    Price:
+    <input type="number" step="0.01" formControlName="price" />
+  </label>
+
+  <hr>
+  <button type="submit" [disabled]="bookForm.invalid">
+    {{ isEdit ? 'Update Book' : 'Add New Book' }}
+  </button>
+  <button type="button" (click)="cancel()">Cancel</button>
+</form>

@@ -1,0 +1,38 @@
+  <div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+    <h2>Books</h2>
+    <div class="btnContainer">
+      <button class="primary" routerLink="/books/create">+ Add Book</button>
+      <button class="secondary" (click)="downloadHtmlReport()">Export HTML</button>
+    </div>
+  </div>
+<ng-container *ngIf="books() as allBooks; else loading">
+    <table>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author(s)</th>
+            <th>Category</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let b of allBooks;">
+            <td># {{b.isbn}}</td>
+            <td>{{b.title}}</td>
+            <td>{{b.authors.join(', ')}}</td>
+            <td>{{b.category}}</td>
+            <td>{{b.year}}</td>
+            <td>{{b.price}}</td>
+            <td class="btnContainer">
+                <button (click)="edit(b)">Edit</button>
+                <button (click)="delete(b.isbn)">Delete</button>
+            </td>
+        </tr>
+    </table>
+</ng-container>
+
+<ng-template #loading>
+    <div style="font-weight:bold;">Loading books...</div>
+</ng-template>
+</div>
