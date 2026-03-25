@@ -107,7 +107,7 @@
                 if (bookElem == null)
                     throw new InvalidOperationException($"Book with ISBN {updated.Isbn} not found.");
 
-                // מחליף את הערכים
+                
                 bookElem.SetElementValue("title", updated.Title);
                 bookElem.Elements("author").Remove();
                 foreach (var a in updated.Authors)
