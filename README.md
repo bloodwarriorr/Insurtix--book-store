@@ -27,9 +27,9 @@ Open BookStore.sln in Visual Studio 2022.
 
 Select your desired profile from the run button dropdown:
 
-BookStore-Development: Uses Data_Dev folder.
+BookStore-Development: Uses Dev folder.
 
-BookStore-Test: Uses Data_Test folder.
+BookStore-Production: Uses Prod folder.
 
 Press F5. Swagger will open automatically at https://localhost:[PORT]/swagger.
 
