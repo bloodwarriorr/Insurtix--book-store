@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map,switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+import { ToastrService } from 'ngx-toastr';
 export interface Book {
   isbn: string;
   title: string;
@@ -17,7 +17,7 @@ export interface Book {
 export class BookService {
 private apiUrl = `${environment.apiUrl}/books`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
 
   getAll(): Observable<Book[]> {
@@ -39,7 +39,8 @@ private apiUrl = `${environment.apiUrl}/books`;
       map(books => {
         const exists = books.find(b => b.isbn === book.isbn);
         if (exists) {
-          throw new Error(`Book with ISBN ${book.isbn} already exists.`);
+          this.toastr.error(`Book with ISBN ${book.isbn} already exists.`, 'Failed');
+          throw new Error(`Duplicate ISBN ${book.isbn}`);
         }
         return book;
       }),
@@ -70,6 +71,7 @@ private apiUrl = `${environment.apiUrl}/books`;
     } else if (err.status) {
       msg = `Server returned code ${err.status}, message: ${err.message}`;
     }
+    this.toastr.error(msg, 'Failed');
     return throwError(() => new Error(msg));
   }
 }

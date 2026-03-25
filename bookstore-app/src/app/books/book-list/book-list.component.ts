@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Book, BookService } from '../book.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-book-list',
   standalone: true,
@@ -17,6 +17,7 @@ export class BookListComponent {
   private service = inject(BookService);
   private router = inject(Router);
   private http = inject(HttpClient);
+  private toastr = inject(ToastrService);
   books = signal<Book[]>([]);
 
   constructor() {
@@ -36,6 +37,7 @@ delete(isbn: string) {
       this.service.delete(isbn).subscribe({
         next: () => {
           this.books.update(current => current.filter(b => b.isbn !== isbn));
+          this.toastr.success('The book was deleted successfully!', 'Success');
         },
         error: (err) => console.error(err)
       });

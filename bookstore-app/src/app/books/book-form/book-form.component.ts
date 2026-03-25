@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
 import { BookService } from '../book.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-book-form',
@@ -21,7 +21,8 @@ export class BookFormComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private bookService: BookService
+    private bookService: BookService,
+    private toastr : ToastrService
   ) {}
 
   ngOnInit() {
@@ -43,9 +44,7 @@ export class BookFormComponent implements OnInit {
       this.isEdit = true;
       this.loadBookFromServer(isbnParam);
     } else {
-    
       this.isEdit = false;
-      console.log('Mode: Add New Book');
     }
   }
 }
@@ -117,7 +116,7 @@ submit() {
 
   request.subscribe({
     next: () => {
-      alert(this.isEdit ? 'Updated!' : 'Added!');
+      this.toastr.success(`The book was ${this.isEdit ? 'updated' : 'added'} successfully!`, 'Success');
       this.router.navigate(['/books']);
     },
     error: (err) => (this.errorMessage = 'Action failed.')

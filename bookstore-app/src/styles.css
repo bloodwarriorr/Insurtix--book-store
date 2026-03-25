@@ -99,3 +99,13 @@ a {
   display: flex;
   gap: 10px;
 }
+.toast-container .ngx-toastr {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    opacity: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.toast-success {
+    background-color: #28a745; 
+}
