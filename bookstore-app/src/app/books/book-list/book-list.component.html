@@ -16,7 +16,7 @@
             <th>Price</th>
             <th>Actions</th>
         </tr>
-        <tr *ngFor="let b of books | async;">
+        <tr *ngFor="let b of books()">
             <td># {{b.isbn}}</td>
             <td>{{b.title}}</td>
             <td>{{b.authors.join(', ')}}</td>
