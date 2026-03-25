@@ -1,8 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Book, BookService } from '../book.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';

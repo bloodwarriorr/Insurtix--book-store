@@ -6,7 +6,6 @@
       <button class="secondary" (click)="downloadHtmlReport()">Export HTML</button>
     </div>
   </div>
-<ng-container *ngIf="books() as allBooks; else loading">
     <table>
         <tr>
             <th>ISBN</th>
@@ -17,7 +16,7 @@
             <th>Price</th>
             <th>Actions</th>
         </tr>
-        <tr *ngFor="let b of allBooks;">
+        <tr *ngFor="let b of books | async;">
             <td># {{b.isbn}}</td>
             <td>{{b.title}}</td>
             <td>{{b.authors.join(', ')}}</td>
@@ -30,8 +29,6 @@
             </td>
         </tr>
     </table>
-</ng-container>
-
 <ng-template #loading>
     <div style="font-weight:bold;">Loading books...</div>
 </ng-template>

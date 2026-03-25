@@ -1,4 +1,4 @@
-<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+<ng-container *ngIf="errorMessage" class="error-message">{{ errorMessage }}</ng-container>
 
 <form *ngIf="bookForm" [formGroup]="bookForm" (ngSubmit)="submit()">
   <h3 *ngIf="isEdit">Edit Book:</h3>
