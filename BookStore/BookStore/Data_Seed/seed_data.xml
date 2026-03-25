@@ -26,13 +26,4 @@
     <year>2003</year>
     <price>39.95</price>
   </book>
-  <book category="other">
-    <isbn>9051234567894</isbn>
-    <title>testtt</title>
-    <author>testtt1</author>
-    <author>testtt2</author>
-    <author>testtt3</author>
-    <year>2026</year>
-    <price>49.9</price>
-  </book>
 </bookstore>
